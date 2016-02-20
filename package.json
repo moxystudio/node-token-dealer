@@ -1,0 +1,46 @@
+{
+  "name": "token-dealer",
+  "version": "0.1.0",
+  "description": "Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint **/*.js --ignore-pattern=test/coverage",
+    "test": "mocha --bail -t 5000",
+    "test-cov": "istanbul cover --dir test/coverage _mocha -- --bail -t 5000 && echo Coverage lies in test/coverage/lcov-report/index.html",
+    "test-travis": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -t 5000 -- --bail && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "bugs": {
+    "url": "https://github.com/IndigoUnited/node-token-dealer/issues/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/IndigoUnited/node-token-dealer.git"
+  },
+  "keywords": [
+    "token",
+    "dealer",
+    "rate-limit",
+    "ratelimit",
+    "github",
+    "twitter",
+    "facebook",
+    "api"
+  ],
+  "author": "IndigoUnited <hello@indigounited.com> (http://indigounited.com)",
+  "license": "MIT",
+  "dependencies": {
+    "lru-cache": "^4.0.0"
+  },
+  "devDependencies": {
+    "@satazor/eslint-config": "^2.0.0",
+    "bluebird": "^3.3.1",
+    "chai": "^3.4.1",
+    "coveralls": "^2.11.6",
+    "eslint": "^2.2.0",
+    "istanbul": "^0.4.1",
+    "mocha": "^2.3.4"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}

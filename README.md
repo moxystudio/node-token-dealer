@@ -6,9 +6,9 @@
 [downloads-image]:http://img.shields.io/npm/dm/token-dealer.svg
 [npm-image]:http://img.shields.io/npm/v/token-dealer.svg
 [travis-url]:https://travis-ci.org/IndigoUnited/node-token-dealer
-[travis-image]:http://img.shields.io/travis/IndigoUnited/node-token-dealer.svg
+[travis-image]:http://img.shields.io/travis/IndigoUnited/node-token-dealer/master.svg
 [coveralls-url]:https://coveralls.io/r/IndigoUnited/node-token-dealer
-[coveralls-image]:https://img.shields.io/coveralls/IndigoUnited/node-token-dealer.svg
+[coveralls-image]:https://img.shields.io/coveralls/IndigoUnited/node-token-dealer/master.svg
 [david-dm-url]:https://david-dm.org/IndigoUnited/node-token-dealer
 [david-dm-image]:https://img.shields.io/david/IndigoUnited/node-token-dealer.svg
 [david-dm-dev-url]:https://david-dm.org/IndigoUnited/node-token-dealer#info=devDependencies

@@ -7,7 +7,7 @@
     "lint": "eslint **/*.js --ignore-pattern=test/coverage",
     "test": "mocha --bail -t 5000",
     "test-cov": "istanbul cover --dir test/coverage _mocha -- --bail -t 5000 && echo Coverage lies in test/coverage/lcov-report/index.html",
-    "test-travis": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -t 5000 -- --bail && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test-travis": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --bail -t 5000 && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "bugs": {
     "url": "https://github.com/IndigoUnited/node-token-dealer/issues/"

@@ -45,7 +45,7 @@ const tokens = [
 ];
 
 tokenDealer(tokens, (token, exhaust) => {
-    const handleRateLimit = (response, err) => {
+    const handleResponse = (response, err) => {
         if (response.headers['x-ratelimit-remaining'] === '0') {
             exhaust(Number(response.headers['x-ratelimit-reset']) * 1000, err && err.statusCode === 403);
         }
@@ -56,10 +56,10 @@ tokenDealer(tokens, (token, exhaust) => {
         headers: { Authorization: `token ${token}` },
     })
     .then((response) => {
-        handleRateLimit(response);
+        handleResponse(response);
         return response;
     }, (err) => {
-        err.response && handleRateLimit(err.response, err);
+        err.response && handleResponse(err.response, err);
         throw err;
     });
 })

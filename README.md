@@ -71,7 +71,7 @@ tokenDealer(tokens, (token, exhaust) => {
 Available options:
 
 - `group`: The group associated to the tokens; this effectively groups tokens to prevent conflicts (e.g. `github`, defaults to `default`).
-- `wait`: True to wait for a token to be free in case all are exhausted (defaults to `false`); alternatively you may pass a function that will be called with `(token, delay)` so that you can decide to wait dynamically.
+- `wait`: True to wait for a token to be free in case all are exhausted (defaults to `false`); alternatively you may pass a function that will be called with `[token, duration]` so that you can decide to wait dynamically.
 - `lru`: A custom [LRU cache](https://www.npmjs.com/package/lru-cache) instance to be used internally.
 
 

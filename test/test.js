@@ -222,21 +222,6 @@ describe('token-dealer', () => {
         });
     });
 
-    it('should have a default reset if exhausted without a reset timestamp', () => {
-        const tokens = ['A'];
-
-        return tokenDealer(tokens, (token, exhaust) => exhaust(), { lru })
-        .then(() => {
-            const usage = tokenDealer.getTokensUsage(tokens, { lru });
-            const expectedReset = Date.now() + 60 * 60 * 1000;
-
-            expect(usage).to.be.an('object');
-            expect(usage.A).to.be.an('object');
-            expect(usage.A.exhausted).to.equal(true);
-            expect(usage.A.reset).to.be.within(expectedReset - 1000, expectedReset + 1000);
-        });
-    });
-
     it('should decrease pending if fn fails synchronously', () => {
         const tokens = ['A', 'B'];
         const suppliedTokens = [];

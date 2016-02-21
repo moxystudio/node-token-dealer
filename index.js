@@ -78,7 +78,7 @@ function dealToken(tokens, fn, options, errors) {
         return fn(chosen.token, (reset, failed) => {
             retryOnFailure = !!failed;
             chosen.usage.exhausted = true;
-            chosen.usage.reset = reset || Date.now() + 60 * 60 * 1000;
+            chosen.usage.reset = reset;
         });
     })
     .then((val) => {

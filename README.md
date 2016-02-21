@@ -29,7 +29,7 @@ manage these tokens and their usage.
 
 ### tokenDealer(tokens, fn, [options])
 
-Calls `fn(token, exhaust)` with the most appropriate `token` from `tokens` and an `exhaust` function that you may call to signal that the token is exhausted.
+Calls `fn(token, exhaust)` with the most appropriate `token` from `tokens` and a `exhaust` function that you may call to signal that the token is exhausted.
 
 Basically the only thing you must do is call `exhaust(reset, [failed])` whenever you know that the token may not be used again until `reset` (timestamp in ms). Additionally, you may pass `failed=true` if the operation you were trying to do with the token failed because its rate limit was reached. If the promise is rejected and `exhaust` was called with `failed=true`, `fn` will be called again but with a different token.
 

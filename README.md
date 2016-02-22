@@ -58,10 +58,10 @@ tokenDealer(tokens, (token, exhaust) => {
         headers: { Authorization: `token ${token}` },
     })
     .then((response) => {
-        handleRateLimit(response);
+        handleResponse(response);
         return response;
     }, (err) => {
-        err.response && handleRateLimit(err.response, err);
+        err.response && handleResponse(err.response, err);
         throw err;
     });
 })

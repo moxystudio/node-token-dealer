@@ -31,7 +31,7 @@ manage these tokens and their usage.
 
 Calls `fn(token, exhaust)` with the most appropriate `token` from `tokens` and a `exhaust` function that you may call to signal that the token is exhausted.
 
-Basically the only thing you must do is call `exhaust(reset, [failed])` whenever you know that the token may not be used again until `reset` (timestamp in ms). Additionally, you may pass `failed=true` if the operation you were trying to do with the token failed because its rate limit was reached. If the promise is rejected and `exhaust` was called with `failed=true`, `fn` will be called again but with a different token.
+Basically the only thing you must do is call `exhaust(reset, [retry])` whenever you know that the token may not be used again until `reset` (timestamp in ms). Additionally, you may retry if the operation you were trying to do with the token failed because the token was exhausted, causing `fn` to be called again with another token.
 
 Here's an example from a request to the [GitHub API](https://developer.github.com/v3/#rate-limiting) using [got](https://www.npmjs.com/package/got):
 
@@ -46,8 +46,10 @@ const tokens = [
 
 tokenDealer(tokens, (token, exhaust) => {
     const handleRateLimit = (response, err) => {
-        if (response.headers['x-ratelimit-remaining'] === '0') {
-            exhaust(Number(response.headers['x-ratelimit-reset']) * 1000, err && err.statusCode === 403);
+        const headers = response.headers;
+
+        if (headers['x-ratelimit-remaining'] === '0') {
+            exhaust(Number(headers['x-ratelimit-reset']) * 1000, err && err.statusCode === 403);
         }
     };
 
@@ -65,6 +67,8 @@ tokenDealer(tokens, (token, exhaust) => {
 })
 .then((response) => {
     // ...
+}, (err) => {
+    // If all tokens are exhausted, err.code will be 'EALLTOKENSEXHAUSTED'
 });
 ```
 

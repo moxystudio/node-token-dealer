@@ -51,7 +51,7 @@ function chooseToken(tokens, options) {
     };
 }
 
-function dealToken(tokens, fn, options, errors) {
+function dealToken(tokens, fn, options) {
     const chosen = chooseToken(tokens, options);
 
     if (chosen.usage.exhausted) {
@@ -62,23 +62,24 @@ function dealToken(tokens, fn, options, errors) {
             return Promise.reject(Object.assign(new Error('All tokens are exhausted'), {
                 code: 'EALLTOKENSEXHAUSTED',
                 usage: chosen.overallUsage,
-                errors,
             }));
         }
 
         return new Promise((resolve) => setTimeout(resolve, waitTime))
-        .then(() => dealToken(tokens, fn, options, errors));
+        .then(() => dealToken(tokens, fn, options));
     }
 
     chosen.usage.pending += 1;
-    let retryOnFailure = false;
 
     return Promise.resolve()
     .then(() => {
-        return fn(chosen.token, (reset, failed) => {
-            retryOnFailure = !!failed;
+        return fn(chosen.token, (reset, retry) => {
             chosen.usage.exhausted = true;
             chosen.usage.reset = reset;
+
+            if (retry) {
+                throw Object.assign(new Error('Token is exhausted, retrying..'), { code: 'ETOKENSEXHAUSTED' });
+            }
         });
     })
     .then((val) => {
@@ -87,9 +88,8 @@ function dealToken(tokens, fn, options, errors) {
     }, (err) => {
         chosen.usage.pending -= 1;
 
-        if (retryOnFailure) {
-            errors.push(err);
-            return dealToken(tokens, fn, options, errors);
+        if (err && err.code === 'ETOKENSEXHAUSTED') {
+            return dealToken(tokens, fn, options);
         }
 
         throw err;
@@ -110,7 +110,7 @@ function tokenDealer(tokens, fn, options) {
         lru: defaultLru,
     }, options);
 
-    return dealToken(tokens, fn, options, []);
+    return dealToken(tokens, fn, options);
 }
 
 function getTokensUsage(tokens, options) {

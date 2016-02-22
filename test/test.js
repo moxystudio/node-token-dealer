@@ -46,7 +46,6 @@ describe('token-dealer', () => {
             .then(() => {
                 if (token === 'A') {
                     exhaust(Date.now() + 2000, true);
-                    throw new Error('foo');
                 }
             });
         }, { lru })
@@ -160,7 +159,6 @@ describe('token-dealer', () => {
             .then(() => {
                 resetTimestamps.push(Date.now() + 1000);
                 exhaust(resetTimestamps[resetTimestamps.length - 1], true);
-                throw new Error('foo');
             });
         }, { lru })
         .then(() => {
@@ -173,11 +171,6 @@ describe('token-dealer', () => {
                 A: { exhausted: true, reset: resetTimestamps[0], pending: 0 },
                 B: { exhausted: true, reset: resetTimestamps[1], pending: 0 },
             });
-            expect(err.errors.length).to.equal(2);
-            err.errors.forEach((err) => {
-                expect(err).to.be.an.instanceOf(Error);
-                expect(err.message).to.equal('foo');
-            });
         })
         // Should give A followed by B and then fail
         .then(() => {
@@ -188,7 +181,6 @@ describe('token-dealer', () => {
                 .then(() => {
                     resetTimestamps.push(Date.now() + 1000);
                     exhaust(resetTimestamps[resetTimestamps.length - 1], true);
-                    throw new Error('foo');
                 });
             }, { lru, wait: false });
         })
@@ -200,7 +192,7 @@ describe('token-dealer', () => {
         });
     });
 
-    it('should not redeal tokens if exhaust is called with fail != true', () => {
+    it('should not re-deal tokens if exhaust is called with fail != true', () => {
         const tokens = ['A', 'B'];
         const suppliedTokens = [];
 

@@ -78,7 +78,7 @@ function dealToken(tokens, fn, options) {
             chosen.usage.reset = reset;
 
             if (retry) {
-                throw Object.assign(new Error('Token is exhausted, retrying..'), { code: 'ETOKENSEXHAUSTED' });
+                throw Object.assign(new Error('Token is exhausted, retrying..'), { code: 'ETOKENEXHAUSTED' });
             }
         });
     })
@@ -88,7 +88,7 @@ function dealToken(tokens, fn, options) {
     }, (err) => {
         chosen.usage.inflight -= 1;
 
-        if (err && err.code === 'ETOKENSEXHAUSTED') {
+        if (err && err.code === 'ETOKENEXHAUSTED') {
             return dealToken(tokens, fn, options);
         }
 

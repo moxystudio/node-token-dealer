@@ -101,7 +101,7 @@ const usage = tokenDealer.getTokensUsage(tokens);
 //     'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa': {
 //         exhausted: true,       // true if exhausted, false otherwise
 //         reset: 1455996883369,  // the timestamp in which the token will become available again
-//         pending: 0,            // the number of deliveries (`fn` calls) that still haven't completed
+//         inflight: 0,           // the number of deliveries (`fn` calls) that still haven't completed
 //     },
 //     'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb': {
 //         // ...

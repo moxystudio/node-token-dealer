@@ -10,7 +10,7 @@ function retrieveTokenUsage(token, options) {
     let tokenUsage = options.lru.get(key);
 
     if (!tokenUsage || (tokenUsage.exhausted && Date.now() >= tokenUsage.reset)) {
-        tokenUsage = { exhausted: false, reset: null, pending: 0 };
+        tokenUsage = { exhausted: false, reset: null, inflight: 0 };
         options.lru.set(key, tokenUsage);
     }
 
@@ -37,8 +37,8 @@ function chooseToken(tokens, options) {
             return chosenTokenIndex;
         }
 
-        // If both ARE NOT exhausted, prefer the one with less pending requests
-        return chosenTokenUsage.pending <= tokenUsage.pending ? chosenTokenIndex : tokenIndex;
+        // If both ARE NOT exhausted, prefer the one with less inflight requests
+        return chosenTokenUsage.inflight <= tokenUsage.inflight ? chosenTokenIndex : tokenIndex;
     }, 0);
 
     const chosenToken = tokens[chosenTokenIndex];
@@ -69,7 +69,7 @@ function dealToken(tokens, fn, options) {
         .then(() => dealToken(tokens, fn, options));
     }
 
-    chosen.usage.pending += 1;
+    chosen.usage.inflight += 1;
 
     return Promise.resolve()
     .then(() => {
@@ -83,10 +83,10 @@ function dealToken(tokens, fn, options) {
         });
     })
     .then((val) => {
-        chosen.usage.pending -= 1;
+        chosen.usage.inflight -= 1;
         return val;
     }, (err) => {
-        chosen.usage.pending -= 1;
+        chosen.usage.inflight -= 1;
 
         if (err && err.code === 'ETOKENSEXHAUSTED') {
             return dealToken(tokens, fn, options);

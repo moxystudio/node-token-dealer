@@ -108,7 +108,7 @@ describe('token-dealer', () => {
         });
     });
 
-    it('should deal tokens, giving less priority to the ones with higher pending count', () => {
+    it('should deal tokens, giving less priority to the ones with higher inflight count', () => {
         const tokens = ['A', 'B', 'C'];
         const suppliedTokens = [];
 
@@ -168,8 +168,8 @@ describe('token-dealer', () => {
             expect(err).to.be.an.instanceOf(Error);
             expect(err.code).to.equal('EALLTOKENSEXHAUSTED');
             expect(err.usage).to.eql({
-                A: { exhausted: true, reset: resetTimestamps[0], pending: 0 },
-                B: { exhausted: true, reset: resetTimestamps[1], pending: 0 },
+                A: { exhausted: true, reset: resetTimestamps[0], inflight: 0 },
+                B: { exhausted: true, reset: resetTimestamps[1], inflight: 0 },
             });
         })
         // Should give A followed by B and then fail
@@ -214,7 +214,7 @@ describe('token-dealer', () => {
         });
     });
 
-    it('should decrease pending if fn fails synchronously', () => {
+    it('should decrease inflight if fn fails synchronously', () => {
         const tokens = ['A', 'B'];
         const suppliedTokens = [];
 
@@ -229,8 +229,8 @@ describe('token-dealer', () => {
             expect(err.message).to.equal('foo');
             expect(suppliedTokens).to.eql(['A']);
             expect(tokenDealer.getTokensUsage(tokens, { lru })).to.eql({
-                A: { exhausted: false, reset: null, pending: 0 },
-                B: { exhausted: false, reset: null, pending: 0 },
+                A: { exhausted: false, reset: null, inflight: 0 },
+                B: { exhausted: false, reset: null, inflight: 0 },
             });
         });
     });
@@ -321,8 +321,8 @@ describe('token-dealer', () => {
     describe('.getTokensUsage()', () => {
         it('should give the current tokens usage', () => {
             expect(tokenDealer.getTokensUsage(['A', 'B'], { lru })).to.eql({
-                A: { exhausted: false, reset: null, pending: 0 },
-                B: { exhausted: false, reset: null, pending: 0 },
+                A: { exhausted: false, reset: null, inflight: 0 },
+                B: { exhausted: false, reset: null, inflight: 0 },
             });
         });
     });

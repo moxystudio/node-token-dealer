@@ -45,7 +45,7 @@ const tokens = [
 ];
 
 tokenDealer(tokens, (token, exhaust) => {
-    const handleRateLimit = (response, err) => {
+    const handleResponse = (response, err) => {
         const headers = response.headers;
 
         if (headers['x-ratelimit-remaining'] === '0') {

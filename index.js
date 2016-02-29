@@ -130,3 +130,4 @@ function getTokensUsage(tokens, options) {
 
 module.exports = tokenDealer;
 module.exports.getTokensUsage = getTokensUsage;
+module.exports.defaultLru = defaultLru;

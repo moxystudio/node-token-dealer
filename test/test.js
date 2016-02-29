@@ -326,4 +326,10 @@ describe('token-dealer', () => {
             });
         });
     });
+
+    describe('.defaultLru', () => {
+        it('should be the default lru', () => {
+            expect(tokenDealer.defaultLru).to.be.ok;
+        });
+    });
 });

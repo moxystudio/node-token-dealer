@@ -45,11 +45,11 @@ const tokens = [
 ];
 
 tokenDealer(tokens, (token, exhaust) => {
-    const handleResponse = (response, err) => {
-        const headers = response.headers;
+    const handleRateLimit = (response, err) => {
+        if (response.headers['x-ratelimit-remaining'] === '0') {
+            const isRateLimitError = err && err.statusCode === 403 && /rate limit/i.test(response.body.message);
 
-        if (headers['x-ratelimit-remaining'] === '0') {
-            exhaust(Number(headers['x-ratelimit-reset']) * 1000, err && err.statusCode === 403);
+            exhaust(Number(response.headers['x-ratelimit-reset']) * 1000, isRateLimitError);
         }
     };
 
@@ -58,10 +58,10 @@ tokenDealer(tokens, (token, exhaust) => {
         headers: { Authorization: `token ${token}` },
     })
     .then((response) => {
-        handleResponse(response);
+        handleRateLimit(response);
         return response;
     }, (err) => {
-        err.response && handleResponse(err.response, err);
+        err.response && handleRateLimit(err.response, err);
         throw err;
     });
 })
@@ -79,7 +79,7 @@ Available options:
 - `lru`: A custom [LRU cache](https://www.npmjs.com/package/lru-cache) instance to be used internally.
 
 
-If `tokens` is nullish or an empty array, the token given to `fn` will be `null`.
+If `tokens` is nullish or an empty array, the `token` and `exhaust` given to `fn` will be `nullish`.
 
 
 ### tokenDealer.getTokensUsage(tokens, [options])

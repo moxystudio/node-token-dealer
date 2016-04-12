@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@satazor/eslint-config": "^2.0.0",
-    "bluebird": "^3.3.1",
+    "bluebird": "^3.3.5",
     "chai": "^3.4.1",
     "coveralls": "^2.11.6",
     "eslint": "^2.3.0",

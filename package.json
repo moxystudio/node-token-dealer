@@ -4,7 +4,7 @@
   "description": "Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint '{*.js,lib/**/*.js,test/**/*.js}' --ignore-pattern=test/coverage",
+    "lint": "eslint '{*.js,test/**/*.js}' --ignore-pattern=test/coverage",
     "test": "mocha --bail -t 5000",
     "test-cov": "istanbul cover --dir test/coverage _mocha -- --bail -t 5000 && echo Coverage lies in test/coverage/lcov-report/index.html",
     "test-travis": "istanbul cover _mocha --report lcovonly -- --bail -t 5000 && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

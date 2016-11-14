@@ -1,6 +1,6 @@
 {
   "name": "token-dealer",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you",
   "main": "index.js",
   "scripts": {

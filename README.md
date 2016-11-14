@@ -77,6 +77,7 @@ Available options:
 - `group`: The group associated to the tokens; this effectively groups tokens to prevent conflicts (e.g. `github`, defaults to `default`).
 - `wait`: True to wait for a token to be free in case all are exhausted (defaults to `false`); alternatively you may pass a function that will be called with `[token, duration]` so that you can decide to wait dynamically.
 - `lru`: A custom [LRU cache](https://www.npmjs.com/package/lru-cache) instance to be used internally.
+- `onExhausted`: Called with `(token, reset)` whenever a token become exhausted (defaults to `null`).
 
 
 If `tokens` is nullish or an empty array, the given `token` will be an empty string.

@@ -137,6 +137,39 @@ describe('token-dealer', () => {
         });
     });
 
+    it('should call options.onExhausted when a token become exhausted', () => {
+        let onExhaustedCalls = 0;
+        const resetTimestamp = Date.now() + 2000;
+
+        const onExhausted = (token, reset) => {
+            expect(token).to.equal('A');
+            expect(reset).to.equal(resetTimestamp);
+            onExhaustedCalls += 1;
+        };
+
+        // Test if it's called
+        return tokenDealer(['A'], (token, exhaust) => {
+            exhaust(resetTimestamp, true);
+        }, { lru, onExhausted })
+        .then(() => {
+            throw new Error('Should have failed');
+        }, (err) => {
+            expect(err).to.be.an.instanceOf(Error);
+            expect(err.code).to.equal('EALLTOKENSEXHAUSTED');
+        })
+        // Try again, but this time it shouldn't be called because it's already exhausted
+        .then(() => {
+            return tokenDealer(['A'], () => {}, { lru, onExhausted })
+            .then(() => {
+                throw new Error('Should have failed');
+            }, (err) => {
+                expect(err).to.be.an.instanceOf(Error);
+                expect(err.code).to.equal('EALLTOKENSEXHAUSTED');
+            });
+        })
+        .then(() => expect(onExhaustedCalls).to.equal(1));
+    });
+
     it('should isolate tokens by groups', () => {
         const tokens = ['A', 'B', 'C'];
         const suppliedTokens = [];

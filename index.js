@@ -74,6 +74,7 @@ function dealToken(tokens, fn, options) {
     return Promise.resolve()
     .then(() => {
         return fn(chosen.token, (reset, retry) => {
+            options.onExhausted && options.onExhausted(chosen.token, reset);
             chosen.usage.exhausted = true;
             chosen.usage.reset = reset;
 
@@ -107,6 +108,7 @@ function tokenDealer(tokens, fn, options) {
         group: 'default',
         wait: false,
         lru: defaultLru,
+        onExhausted: null,
     }, options);
 
     return dealToken(tokens, fn, options);

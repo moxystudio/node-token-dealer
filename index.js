@@ -100,8 +100,7 @@ function dealToken(tokens, fn, options) {
 
 function tokenDealer(tokens, fn, options) {
     if (!tokens || !tokens.length) {
-        return Promise.resolve()
-        .then(() => fn(null, () => {}));
+        tokens = [''];
     }
 
     options = Object.assign({
@@ -114,6 +113,10 @@ function tokenDealer(tokens, fn, options) {
 }
 
 function getTokensUsage(tokens, options) {
+    if (!tokens || !tokens.length) {
+        tokens = [''];
+    }
+
     options = Object.assign({
         group: 'default',
         lru: defaultLru,

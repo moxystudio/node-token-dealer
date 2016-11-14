@@ -31,7 +31,7 @@ manage these tokens and their usage.
 
 Calls `fn(token, exhaust)` with the most appropriate `token` from `tokens` and a `exhaust` function that you may call to signal that the token is exhausted.
 
-Basically the only thing you must do is call `exhaust(reset, [retry])` whenever you know that the token may not be used again until `reset` (timestamp in ms). Additionally, you may retry if the operation you were trying to do with the token failed because the token was exhausted, causing `fn` to be called again with another token.
+Basically the only thing you must do is call `exhaust(reset, [retry])` whenever you know that the token may not be used again until `reset` (timestamp in ms). Additionally, you may retry if the operation you were trying to do failed because the token was exhausted, causing `fn` to be called again with another token.
 
 Here's an example from a request to the [GitHub API](https://developer.github.com/v3/#rate-limiting) using [got](https://www.npmjs.com/package/got):
 
@@ -79,7 +79,7 @@ Available options:
 - `lru`: A custom [LRU cache](https://www.npmjs.com/package/lru-cache) instance to be used internally.
 
 
-If `tokens` is nullish or an empty array, the `token` and `exhaust` given to `fn` will be `nullish`.
+If `tokens` is nullish or an empty array, the given `token` will be an empty string.
 
 
 ### tokenDealer.getTokensUsage(tokens, [options])

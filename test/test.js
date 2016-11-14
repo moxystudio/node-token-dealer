@@ -16,21 +16,33 @@ describe('token-dealer', () => {
         lru = new LRU();
     });
 
-    it('should return null if no tokens were passed', () => {
+    it('should return an empty token if no tokens were passed', () => {
         let suppliedToken;
 
         return tokenDealer(null, (token) => {
             suppliedToken = token;
         }, { lru })
         .then(() => {
-            expect(suppliedToken).to.equal(null);
+            expect(suppliedToken).to.equal('');
 
             return tokenDealer([], (token) => {
                 suppliedToken = token;
             }, { lru });
         })
         .then(() => {
-            expect(suppliedToken).to.equal(null);
+            expect(suppliedToken).to.equal('');
+        });
+    });
+
+    it('should still be able to call exhaust() if no tokens were supplied', () => {
+        return tokenDealer(null, (token, exhaust) => {
+            exhaust(Date.now() + 2000, true);
+        }, { lru })
+        .then(() => {
+            throw new Error('Should have failed');
+        }, (err) => {
+            expect(err).to.be.an.instanceOf(Error);
+            expect(err.code).to.equal('EALLTOKENSEXHAUSTED');
         });
     });
 
@@ -323,6 +335,10 @@ describe('token-dealer', () => {
             expect(tokenDealer.getTokensUsage(['A', 'B'], { lru })).to.eql({
                 A: { exhausted: false, reset: null, inflight: 0 },
                 B: { exhausted: false, reset: null, inflight: 0 },
+            });
+
+            expect(tokenDealer.getTokensUsage([], { lru })).to.eql({
+                '': { exhausted: false, reset: null, inflight: 0 },
             });
         });
     });

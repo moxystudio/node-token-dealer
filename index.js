@@ -74,9 +74,10 @@ function dealToken(tokens, fn, options) {
     return Promise.resolve()
     .then(() => {
         return fn(chosen.token, (reset, retry) => {
-            options.onExhausted && options.onExhausted(chosen.token, reset);
             chosen.usage.exhausted = true;
             chosen.usage.reset = reset;
+
+            options.onExhausted && options.onExhausted(chosen.token, reset);
 
             if (retry) {
                 throw Object.assign(new Error('Token is exhausted, retrying..'), { code: 'ETOKENEXHAUSTED' });

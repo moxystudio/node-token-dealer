@@ -11,7 +11,7 @@
 [coveralls-image]:https://img.shields.io/coveralls/IndigoUnited/node-token-dealer/master.svg
 [david-dm-url]:https://david-dm.org/IndigoUnited/node-token-dealer
 [david-dm-image]:https://img.shields.io/david/IndigoUnited/node-token-dealer.svg
-[david-dm-dev-url]:https://david-dm.org/IndigoUnited/node-token-dealer#info=devDependencies
+[david-dm-dev-url]:https://david-dm.org/IndigoUnited/node-token-dealer?type=dev
 [david-dm-dev-image]:https://img.shields.io/david/dev/IndigoUnited/node-token-dealer.svg
 
 Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you.

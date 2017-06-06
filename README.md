@@ -1,7 +1,5 @@
 # token-dealer
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/IndigoUnited/node-token-dealer.svg)](https://greenkeeper.io/)
-
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 [npm-url]:https://npmjs.org/package/token-dealer

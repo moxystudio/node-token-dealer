@@ -72,20 +72,19 @@ function dealToken(tokens, fn, options) {
     chosen.usage.inflight += 1;
 
     return Promise.resolve()
-    .then(() => {
-        return fn(chosen.token, (reset, retry) => {
-            chosen.usage.exhausted = true;
-            chosen.usage.reset = reset;
+    .then(() => fn(chosen.token, (reset, retry) => {
+        chosen.usage.exhausted = true;
+        chosen.usage.reset = reset;
 
-            options.onExhausted && options.onExhausted(chosen.token, reset);
+        options.onExhausted && options.onExhausted(chosen.token, reset);
 
-            if (retry) {
-                throw Object.assign(new Error('Token is exhausted, retrying..'), { code: 'ETOKENEXHAUSTED' });
-            }
-        });
-    })
+        if (retry) {
+            throw Object.assign(new Error('Token is exhausted, retrying..'), { code: 'ETOKENEXHAUSTED' });
+        }
+    }))
     .then((val) => {
         chosen.usage.inflight -= 1;
+
         return val;
     }, (err) => {
         chosen.usage.inflight -= 1;
@@ -105,12 +104,13 @@ function tokenDealer(tokens, fn, options) {
         tokens = [''];
     }
 
-    options = Object.assign({
+    options = {
         group: 'default',
         wait: false,
         lru: defaultLru,
         onExhausted: null,
-    }, options);
+        ...options,
+    };
 
     return dealToken(tokens, fn, options);
 }
@@ -120,10 +120,11 @@ function getTokensUsage(tokens, options) {
         tokens = [''];
     }
 
-    options = Object.assign({
+    options = {
         group: 'default',
         lru: defaultLru,
-    }, options);
+        ...options,
+    };
 
     const tokensUsage = {};
 

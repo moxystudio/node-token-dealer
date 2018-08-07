@@ -1,21 +1,7 @@
 {
   "name": "token-dealer",
-  "version": "2.1.1",
   "description": "Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint '{*.js,test/**/*.js}' --ignore-pattern=test/coverage",
-    "test": "mocha --bail -t 5000",
-    "test-cov": "istanbul cover --dir test/coverage _mocha -- --bail -t 5000 && echo Coverage lies in test/coverage/lcov-report/index.html",
-    "test-travis": "istanbul cover _mocha --report lcovonly -- --bail -t 5000 && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-  },
-  "bugs": {
-    "url": "https://github.com/IndigoUnited/node-token-dealer/issues/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/IndigoUnited/node-token-dealer.git"
-  },
+  "version": "2.1.1",
   "keywords": [
     "token",
     "dealer",
@@ -26,21 +12,53 @@
     "facebook",
     "api"
   ],
-  "author": "IndigoUnited <hello@indigounited.com> (http://indigounited.com)",
+  "author": "André Cruz <andre@moxy.studio>",
+  "homepage": "https://github.com/moxystudio/node-token-dealer",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:moxystudio/node-token-dealer.git"
+  },
   "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest --env node --coverage",
+    "prerelease": "npm t && npm run lint",
+    "release": "standard-version",
+    "precommit": "lint-staged",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "standard-version": {
+    "scripts": {
+      "posttag": "git push --follow-tags origin master && npm publish"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "dependencies": {
     "lru-cache": "^4.0.0"
   },
   "devDependencies": {
-    "@satazor/eslint-config": "^3.0.0",
-    "bluebird": "^3.3.1",
-    "chai": "^4.0.2",
-    "coveralls": "^2.11.6",
-    "eslint": "^3.0.0",
-    "istanbul": "^0.4.1",
-    "mocha": "^3.0.1"
-  },
-  "engines": {
-    "node": ">=4.0.0"
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
+    "delay": "^3.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-moxy": "^6.0.1",
+    "husky": "^0.14.3",
+    "jest": "^23.4.2",
+    "lint-staged": "^7.2.0",
+    "standard-version": "^4.4.0"
   }
 }

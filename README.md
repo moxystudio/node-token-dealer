@@ -1,20 +1,20 @@
 # token-dealer
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 [npm-url]:https://npmjs.org/package/token-dealer
-[downloads-image]:http://img.shields.io/npm/dm/token-dealer.svg
 [npm-image]:http://img.shields.io/npm/v/token-dealer.svg
-[travis-url]:https://travis-ci.org/IndigoUnited/node-token-dealer
-[travis-image]:http://img.shields.io/travis/IndigoUnited/node-token-dealer/master.svg
-[coveralls-url]:https://coveralls.io/r/IndigoUnited/node-token-dealer
-[coveralls-image]:https://img.shields.io/coveralls/IndigoUnited/node-token-dealer/master.svg
-[david-dm-url]:https://david-dm.org/IndigoUnited/node-token-dealer
-[david-dm-image]:https://img.shields.io/david/IndigoUnited/node-token-dealer.svg
-[david-dm-dev-url]:https://david-dm.org/IndigoUnited/node-token-dealer?type=dev
-[david-dm-dev-image]:https://img.shields.io/david/dev/IndigoUnited/node-token-dealer.svg
-[greenkeeper-image]:https://badges.greenkeeper.io/IndigoUnited/node-token-dealer.svg
-[greenkeeper-url]:https://greenkeeper.io/
+[downloads-image]:http://img.shields.io/npm/dm/token-dealer.svg
+[travis-url]:https://travis-ci.org/moxystudio/node-token-dealer
+[travis-image]:http://img.shields.io/travis/moxystudio/node-token-dealer/master.svg
+[codecov-url]:https://codecov.io/gh/moxystudio/node-token-dealer
+[codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/node-token-dealer/master.svg
+[david-dm-url]:https://david-dm.org/moxystudio/node-token-dealer
+[david-dm-image]:https://img.shields.io/david/moxystudio/node-token-dealer.svg
+[david-dm-dev-url]:https://david-dm.org/moxystudio/node-token-dealer?type=dev
+[david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/node-token-dealer.svg
+[greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/node-token-dealer.svg
+[greenkeeper-url]:https://greenkeeper.io
 
 Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you.
 
@@ -55,7 +55,7 @@ tokenDealer(tokens, (token, exhaust) => {
         }
     };
 
-    return got('https://api.github.com/repos/IndigoUnited/node-cross-spawn', {
+    return got('https://api.github.com/repos/moxystudio/node-cross-spawn', {
         json: true,
         headers: { Authorization: `token ${token}` },
     })
@@ -116,7 +116,7 @@ const usage = tokenDealer.getTokensUsage(tokens);
 ## Tests
 
 `$ npm test`   
-`$ npm test-cov` to get coverage report
+`$ npm test -- --watch` during development
 
 
 ## License

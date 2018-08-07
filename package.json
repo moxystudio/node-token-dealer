@@ -1,7 +1,7 @@
 {
   "name": "token-dealer",
   "description": "Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "keywords": [
     "token",
     "dealer",

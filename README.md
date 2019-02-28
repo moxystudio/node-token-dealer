@@ -1,6 +1,6 @@
 # token-dealer
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] 
 
 [npm-url]:https://npmjs.org/package/token-dealer
 [npm-image]:http://img.shields.io/npm/v/token-dealer.svg
@@ -13,8 +13,6 @@
 [david-dm-image]:https://img.shields.io/david/moxystudio/node-token-dealer.svg
 [david-dm-dev-url]:https://david-dm.org/moxystudio/node-token-dealer?type=dev
 [david-dm-dev-image]:https://img.shields.io/david/dev/moxystudio/node-token-dealer.svg
-[greenkeeper-image]:https://badges.greenkeeper.io/moxystudio/node-token-dealer.svg
-[greenkeeper-url]:https://greenkeeper.io
 
 Circumvent API rate limits by having several API tokens and let the dealer manage and give them to you.
 

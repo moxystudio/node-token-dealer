@@ -3,10 +3,10 @@
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 
 [npm-url]:https://npmjs.org/package/token-dealer
-[npm-image]:http://img.shields.io/npm/v/token-dealer.svg
-[downloads-image]:http://img.shields.io/npm/dm/token-dealer.svg
+[npm-image]:https://img.shields.io/npm/v/token-dealer.svg
+[downloads-image]:https://img.shields.io/npm/dm/token-dealer.svg
 [travis-url]:https://travis-ci.org/moxystudio/node-token-dealer
-[travis-image]:http://img.shields.io/travis/moxystudio/node-token-dealer/master.svg
+[travis-image]:https://img.shields.io/travis/moxystudio/node-token-dealer/master.svg
 [codecov-url]:https://codecov.io/gh/moxystudio/node-token-dealer
 [codecov-image]:https://img.shields.io/codecov/c/github/moxystudio/node-token-dealer/master.svg
 [david-dm-url]:https://david-dm.org/moxystudio/node-token-dealer
@@ -119,4 +119,4 @@ const usage = tokenDealer.getTokensUsage(tokens);
 
 ## License
 
-Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+Released under the [MIT License](https://www.opensource.org/licenses/mit-license.php).
